@@ -17,7 +17,7 @@ services:
       - "/var/lib/mysql/logs:${MARIADB_LOG_DIR}"
       - /var/docker/mariadb/conf:/etc/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+        MYSQL_ROOT_PASSWORD: secret
+        MYSQL_DATABASE: mydatabase
+        MYSQL_USER: myuser
+        MYSQL_PASSWORD: mypassword
