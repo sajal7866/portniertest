@@ -1,5 +1,9 @@
 version: "2"
 services:
+    php:
+      build:
+      context: .
+      dockerfile: Dockerfile
     www:
         build: .
         ports:
