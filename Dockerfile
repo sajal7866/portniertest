@@ -5,3 +5,4 @@ RUN apt-get install sudo unzip wget -y
 RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN service apache2 restart
+COPY www/ /var/www/html/
