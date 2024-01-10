@@ -13,9 +13,7 @@ services:
   mariadb:
     image: "mariadb:10.6"
     volumes: 
-      - "/var/lib/mysql/data:${MARIADB_DATA_DIR}"
-      - "/var/lib/mysql/logs:${MARIADB_LOG_DIR}"
-      - /var/docker/mariadb/conf:/etc/mysql
+        - ./dump/:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: secret
         MYSQL_DATABASE: mydatabase
