@@ -1,23 +1,25 @@
-version: '3'
+version: "3"
+
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./www:/var/www/html
-    ports:
-      - 8080:80
+  web:
+    image: "apache:php8.2"
+    restart: 'always'
     depends_on:
-      - mysql
-  mysql:
-    image: mariadb:latest
+      - mariadb
+    restart: 'always'
+    ports:
+      - '8080:80'
+    links:
+      - mariadb
+  mariadb:
+    image: "mariadb:10.6"
+    restart: 'always'
+    volumes: 
+      - "/var/lib/mysql/data:${MARIADB_DATA_DIR}"
+      - "/var/lib/mysql/logs:${MARIADB_LOG_DIR}"
+      - /var/docker/mariadb/conf:/etc/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
-    volumes:
-      - ./dump:/var/lib/mysql
-volumes:
-  mysql_data:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
